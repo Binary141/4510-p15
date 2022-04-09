@@ -3,8 +3,8 @@
 #include <bitset>
 #include <bits/stdc++.h>
 #include <list>
-
-int main(){
+#include <fstream>
+int main(int argc, char** argv){
 	std::string text;
 	std::string key;
 	std::string binary_str;
@@ -17,31 +17,38 @@ int main(){
 	long int number;
 	long int temp_number;
 	const int length = 12;
-
-	std::cout << "Key? ";
-       	std::cin >> key;
-	std::cout << std::endl;
-	
+	int line_indicator = 0;
+	std::cout << argv[1] << std::endl;
+	std::ifstream file("encrypt.txt");
+	if (file.is_open()) {
+		std::string line;
+		while (std::getline(file, line)) {
+			if(line_indicator == 0){
+				key = line.c_str();
+				line_indicator += 1;
+			}
+			else{
+				text += line.c_str();
+			}
+		}
+		file.close();
+	}
+	std::cout << "KEY: " << key << std::endl;
+	std::cout << "TEXT: " << text << std::endl;
 	// Convert key to binary	
 	for (std::size_t i = 0; i < key.size(); i++){
 		binary_key.append(std::bitset<8>(key[i]).to_string());
 	}
-
-	std::cout << "text? ";
-       	std::cin >> text;
-	std::cout << std::endl;
 	// Convert text to binary	
 	for (std::size_t i = 0; i < text.size(); i++){
 		binary_str.append(std::bitset<8>(text[i]).to_string());
 	}
-
 	while ((binary_str.size() % length) != 0 ){
 		binary_str.append("1");
 		padding += 1;
 		binary_str.append("0");
 		padding += 1;
 	}
-
 	binary_str.append(std::bitset<length>(padding).to_string());
 	for (int i=0; i < binary_str.size(); i++){
 		temp_string += binary_str[i];
@@ -50,13 +57,11 @@ int main(){
 			temp_string = "";
 		}
 	}
-
 	std::cout <<  "After the block is added that tells us how much padding was added (12-bit block): " << std::endl;
 	for (int i=0; i < string_list.size(); i++){
 		std::cout << string_list[i];
 	}
 	std::cout << std::endl << std::endl;
-
 	binary_key_12_bits = binary_key.substr(0,length);
 	for (int i=0; i < string_list.size(); i++){
 		if( i == 0 ){
@@ -67,7 +72,6 @@ int main(){
 			std::cout << "Key in binary (first 12 bits): " << binary_key_12_bits << std::endl;
 			std::cout << "First 12 bit block (reversed): " << string_list[0] << std::endl;
 			std::cout << "Xor:          " << std::bitset<length>(number) << std::endl;
-
 			final_str.append(std::bitset<length>(number).to_string());
 		}
 		else{
@@ -77,7 +81,6 @@ int main(){
 			temp_number = std::bitset<length>(number).to_ulong() ^ std::bitset<length>(string_list[i]).to_ulong();
 			number = std::bitset<length>(temp_number).to_ulong();
 			std::cout << "Xor			" << std::bitset<length>(number) << std::endl << std::endl;
-
 			std::cout << "Key in binary (first 12 bits): " << binary_key_12_bits << std::endl;
 			// reverses the xor output
 			auto x = std::bitset<length>(number);
@@ -88,13 +91,10 @@ int main(){
 			temp_number = std::bitset<length>(y).to_ulong() ^ std::bitset<length>(binary_key_12_bits).to_ulong();
 			number = std::bitset<length>(temp_number).to_ulong();
 			std::cout << "Xor			" << std::bitset<length>(number) << std::endl << std::endl;
-
 			final_str.append(std::bitset<length>(number).to_string());
 		}
 		std::cout << std::endl;
-		
 	}
 	std::cout << "FINAL_STR: " << final_str << std::endl;
-
 	return 0;
 }
