@@ -5,17 +5,10 @@
 #include <list>
 #include <fstream>
 int main(int argc, char** argv){
-	std::string text;
-	std::string key;
-	std::string binary_str;
-	std::string binary_key;
+	std::string text, key, binary_str, binary_key, temp_string, binary_key_12_bits, final_str;
 	int padding = 0;
-	std::string temp_string;
 	std::vector<std::string> string_list;
-	std::string binary_key_12_bits;
-	std::string final_str;
-	long int number;
-	long int temp_number;
+	long int number, temp_number;
 	const int length = 12;
 	int line_indicator = 0;
 	std::cout << argv[1] << std::endl;
