@@ -18,7 +18,7 @@ Description:
         repeat until all the blocks are encrypted.
 
 ## Example
-![image](https://github.com/Binary141.com/Cypher-block-chaining/blob/master/usage.png)
+![image](https://github.com/Binary141/Cypher-block-chaining/blob/master/usage.png)
 
 ## Toolstack
 * [Python](https://www.python.org/)
