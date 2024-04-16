@@ -56,7 +56,7 @@ def main():
             last_xor = total_xor
         else:
             total_xor = ""
-            print("2nd 12 bit block : ", text_array[i])
+            print("next 12 bit block : ", text_array[i])
             print("Output of last Xor: ", last_xor)
 
             for j in range(len(text_array[i])):

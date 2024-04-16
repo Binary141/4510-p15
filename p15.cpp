@@ -2,7 +2,6 @@
 #include <string>
 #include <bitset>
 #include <bits/stdc++.h>
-#include <list>
 #include <fstream>
 int main(int argc, char** argv){
 	std::string text, key, binary_str, binary_key, temp_string, binary_key_12_bits, final_str;
@@ -11,7 +10,6 @@ int main(int argc, char** argv){
 	long int number, temp_number;
 	const int length = 12;
 	int line_indicator = 0;
-	std::cout << argv[1] << std::endl;
 	std::ifstream file("encrypt.txt");
 	if (file.is_open()) {
 		std::string line;
@@ -43,7 +41,7 @@ int main(int argc, char** argv){
 		padding += 1;
 	}
 	binary_str.append(std::bitset<length>(padding).to_string());
-	for (int i=0; i < binary_str.size(); i++){
+	for (int i=0; i < (int)binary_str.size(); i++){
 		temp_string += binary_str[i];
 		if(temp_string.size() == length){
 			string_list.push_back(temp_string);
@@ -51,12 +49,12 @@ int main(int argc, char** argv){
 		}
 	}
 	std::cout <<  "After the block is added that tells us how much padding was added (12-bit block): " << std::endl;
-	for (int i=0; i < string_list.size(); i++){
+	for (int i=0; i < (int)string_list.size(); i++){
 		std::cout << string_list[i];
 	}
 	std::cout << std::endl << std::endl;
 	binary_key_12_bits = binary_key.substr(0,length);
-	for (int i=0; i < string_list.size(); i++){
+	for (int i=0; i < (int)string_list.size(); i++){
 		if( i == 0 ){
 			// first run through with no previous xor
 			reverse(string_list[0].begin(), string_list[0].end());
@@ -69,7 +67,7 @@ int main(int argc, char** argv){
 		}
 		else{
 			// take previous xor, xor it with next block, then revverse the output and xor that with the key
-			std::cout << "2nd 12 bit block		" << std::bitset<length>(string_list[i]) << std::endl;
+			std::cout << "next 12 bit block		" << std::bitset<length>(string_list[i]) << std::endl;
 			std::cout << "Output of last Xor	" << std::bitset<length>(number) << std::endl;
 			temp_number = std::bitset<length>(number).to_ulong() ^ std::bitset<length>(string_list[i]).to_ulong();
 			number = std::bitset<length>(temp_number).to_ulong();

@@ -1,9 +1,9 @@
-# 4510-p15
+# Cypher block chaining
 
 ## General Info
-This is for an assignment where you take a key, convert it to binary, and use it in conjuction with a certain order of xor'ing the string to create an "encrypted" string. This makes use of Cipher Block Chaining (CBC) as the underlaying technology to achieve the output.
+This is an implementation where you take a key, convert it to binary, and use it in conjuction with a certain order of xor'ing the string to create an "encrypted" string. This makes use of Cipher Block Chaining (CBC) as the underlaying technology to achieve the output.
 
-Assignment Description:
+Description:
  * Here are the steps you should follow:
 
     > Convert the ascii key to a binary (10101010) representation.
@@ -37,4 +37,4 @@ Python:
 
 C++:
 
-        make
+        make run
