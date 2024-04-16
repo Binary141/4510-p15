@@ -17,6 +17,8 @@ Description:
         Take the next block and Xor it with the encrypted output of the first block. Reverse the new block, xor it with the first 12 bits of the key. (add to encrypted output stream)
         repeat until all the blocks are encrypted.
 
+## Example
+![image](https://github.com/Binary141.com/Cypher-block-chaining/raw/master/usage.png)
 
 ## Toolstack
 * [Python](https://www.python.org/)
@@ -25,7 +27,7 @@ Description:
 ## Build Instructions
 Clone repository
 
-        git clone https://github.com/Binary141/4510-p15.git
+        git clone https://github.com/Binary141/Cypher-block-chaining.git
 
 Navigate to project repository
 
